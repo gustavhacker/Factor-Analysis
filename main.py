@@ -1,5 +1,8 @@
 import pandas as pd
 import yfinance as yf
+import time
+import os
+from pathlib import Path
 
 if __name__ == "__main__":
     df_income = pd.read_csv("./data/us-income-quarterly.csv", sep = ";")
@@ -20,8 +23,5 @@ if __name__ == "__main__":
         .merge(df_balance, on=["Ticker", "Fiscal Year", "Fiscal Period"], how="inner")
     )
 
-    tickers = list(df_merged["Ticker"].unique())
-    prices = yf.download(tickers, start="2019-12-01", end="2026-02-30", interval="1m")["Adj Close"]
-    print(prices["AAPL"])
-
-    #TODO: Loopa över X antal tickers och spara ned till CSV-fil saå det bara behöver göras en gång
+    TICKERS = list(df_merged["Ticker"].unique())
+    
