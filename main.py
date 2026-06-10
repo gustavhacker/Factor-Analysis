@@ -25,3 +25,14 @@ if __name__ == "__main__":
 
     TICKERS = list(df_merged["Ticker"].unique())
     
+    df_prices = pd.read_csv("./data/prices.csv", index_col=0, parse_dates=True)
+    df_prices_clean = df_prices.dropna(axis=1, how="any")
+    
+    #TODO:  Använd Publish Date för matchning med pris/inputs 
+
+    #TODO: Implementera ratios och LTM-kolumner för rådata som aggregeras (kassaflöde, vinst, omsättning exv.)
+    # Bygg sedan 
+    
+    tickers_complete = list(df_prices_clean.columns)
+    df_merged_filtered = df_merged[df_merged["Ticker"].isin(tickers_complete)]
+    
